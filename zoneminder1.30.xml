@@ -14,8 +14,8 @@
   </Overview>
   <Support>None yet</Support>
   <Registry>https://hub.docker.com/r/kyis/docker-zoneminder/</Registry>
-  <GitHub>https://github.com/tokyis/docker-zoneminder.git</GitHub>
-  <Repository>kyis/docker-zoneminder</Repository>
+  <GitHub>https://github.com/tokyis/docker-zoneminder.git/tree/1.30</GitHub>
+  <Repository>kyis/docker-zoneminder:1.30</Repository>
   <BindTime>true</BindTime>
   <Privileged>true</Privileged>
     <Networking>
