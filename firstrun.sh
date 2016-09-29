@@ -69,6 +69,7 @@
   echo $TZ > /etc/timezone
   dpkg-reconfigure tzdata
   sed -i "s|^date.timezone =.*$|date.timezone = ${TZ}|" /etc/php/7.0/apache2/php.ini
+  sed -e 's#\(\[mysqld\]\)#\1\ndefault-time-zone = '"'""$TZ""'"'#' -i /etc/mysql/my.cnf
   export DEBCONF_NONINTERACTIVE_SEEN=true DEBIAN_FRONTEND=noninteractive
   
   #fix memory issue
