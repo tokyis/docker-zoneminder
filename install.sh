@@ -48,7 +48,7 @@ mysql -uroot < /usr/share/zoneminder/db/zm_create.sql && \
 mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" && \
 mysqladmin -uroot reload
 mysql -sfu root < "mysql_secure_installation.sql" && \
-
+printf "\ndefault-time-zone='${TZ}'\n" >> /etc/mysql/my.cnf && \
 service mysql restart && \
 service apache2 restart && \
 service zoneminder restart && \
