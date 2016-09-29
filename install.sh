@@ -53,6 +53,8 @@ service mysql restart && \
 service apache2 restart && \
 service zoneminder restart && \
 apt-get clean && \
+
+chmod +x /etc/my_init.d/firstrun.sh && \
 cp -p /etc/zm/zm.conf /root/zm.conf && \
 
 update-rc.d -f apache2 remove && \
