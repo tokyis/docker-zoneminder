@@ -16,7 +16,7 @@ FLUSH PRIVILEGES;
 
 rm /etc/mysql/my.cnf && \
 cp /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/my.cnf && \
-sed -e 's#\(\[mysqld\]\)#\1\ndefault-time-zone='"'""$TZ""'"'#' -i /etc/mysql/my.cnf && \
+sed -e 's#\(\[mysqld\]\)#\1\ndefault-time-zone = '"'""$TZ""'"'#' -i /etc/mysql/my.cnf && \
 
 add-apt-repository -y ppa:iconnor/zoneminder && \
 apt-get update && \
