@@ -24,15 +24,25 @@
   else
     echo "using existing perl data directory"
   fi
+  
+  if [ ! -d /config/skins ]; then
+    echo "moving skins folder to config folder"
+    mkdir /config/skins
+    cp -R -p /usr/share/zoneminder/www/skins /config/
+  else
+    echo "using existing skins directory"
+  fi
 
   
   echo "creating symbolink links"
   rm -r /var/lib/mysql
   rm -r /etc/zm
   rm -r /usr/share/perl5/ZoneMinder
+  rm -r /usr/share/zoneminder/www/skins
   ln -s /config/mysql /var/lib/mysql
   ln -s /config /etc/zm
   ln -s /config/perl5/ZoneMinder /usr/share/perl5/ZoneMinder
+  ln -s /config/skins /usr/share/zoneminder/www/skins
   chown -R mysql:mysql /var/lib/mysql
   chmod -R go+rw /config
   
