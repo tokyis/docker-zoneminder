@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Containers>
   <Name>Zoneminder1.30</Name>
-  <Date>2016-02-25</Date>
+  <Date>2017-03-03</Date>
   <Description>
     Zoneminder is the top Linux video camera security and surveillance solution. [br][br]
     [b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]
@@ -26,12 +26,21 @@
         <ContainerPort>80</ContainerPort>
         <Protocol>tcp</Protocol>
       </Port>
+      <Port>
+        <HostPort>29000</HostPort>
+        <ContainerPort>9000</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
     </Publish>
   </Networking>
   <Environment>
     <Variable>
       <Name>SHMEM</Name>
       <Value>50%</Value>
+    </Variable>
+    <Variable>
+      <Name>USE_SECURE</Name>
+      <Value>0</Value>
     </Variable>
   </Environment>    
   <Data>
@@ -55,4 +64,3 @@
     Initial
   </Changes>
 </Containers>
-

@@ -48,9 +48,24 @@ mysql -uroot < /usr/share/zoneminder/db/zm_create.sql && \
 mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" && \
 mysqladmin -uroot reload
 mysql -sfu root < "mysql_secure_installation.sql" && \
-service mysql restart && \
-service apache2 restart && \
-service zoneminder restart && \
+
+apt-get install -y libcrypt-mysql-perl && \
+apt-get install -y libyaml-perl && \
+apt-get install -y make && \
+curl -L http://cpanmin.us | perl - --self-upgrade && \
+cpanm Net::WebSocket::Server && \
+apt-get install -y libjson-perl && \
+cpanm LWP::Protocol::https && \
+curl https://raw.githubusercontent.com/pliablepixels/zmeventserver/master/zmeventnotification.pl -o /usr/bin/zmeventnotification.pl && \
+#sed -i "s|^use constant EVENT_NOTIFICATION_PORT=>.*|use constant EVENT_NOTIFICATION_PORT=>\$ENV{'EVENT_NOTIFICATION_PORT'};|" /usr/bin/zmeventnotification.pl
+sed -i "s|^my \$useSecure = .*|my \$useSecure = \$ENV{'USE_SECURE'};|" /usr/bin/zmeventnotification.pl
+sed -i "s|^    'zmtelemetry.pl'$|    'zmtelemetry.pl',\n    'zmeventnotification.pl'|" /usr/bin/zmdc.pl
+sed -i "s|^        runCommand( \"zmdc.pl start zmfilter.pl\" );$|        runCommand( \"zmdc.pl start zmeventnotification.pl\" );\n        runCommand( \"zmdc.pl start zmfilter.pl\" );|" /usr/bin/zmpkg.pl
+chmod +x /usr/bin/zmeventnotification.pl
+
+service mysql stop && \
+service apache2 stop && \
+service zoneminder stop && \
 apt-get clean && \
 
 chmod +x /etc/my_init.d/firstrun.sh && \
@@ -59,4 +74,3 @@ cp -p /etc/zm/zm.conf /root/zm.conf && \
 update-rc.d -f apache2 remove && \
 update-rc.d -f mysql remove && \
 update-rc.d -f zoneminder remove
-
