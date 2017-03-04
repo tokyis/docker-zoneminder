@@ -62,6 +62,9 @@ sed -i "s|^my \$useSecure = .*|my \$useSecure = \$ENV{'USE_SECURE'};|" /usr/bin/
 sed -i "s|^    'zmtelemetry.pl'$|    'zmtelemetry.pl',\n    'zmeventnotification.pl'|" /usr/bin/zmdc.pl
 sed -i "s|^        runCommand( \"zmdc.pl start zmfilter.pl\" );$|        runCommand( \"zmdc.pl start zmeventnotification.pl\" );\n        runCommand( \"zmdc.pl start zmfilter.pl\" );|" /usr/bin/zmpkg.pl
 chmod +x /usr/bin/zmeventnotification.pl
+mkdir /etc/private
+touch /etc/private/tokens.txt
+chown www-data:www-data /etc/private/tokens.txt
 
 service mysql stop && \
 service apache2 stop && \
