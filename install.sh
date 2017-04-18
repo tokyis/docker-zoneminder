@@ -66,6 +66,8 @@ mkdir /etc/private
 touch /etc/private/tokens.txt
 chown www-data:www-data /etc/private/tokens.txt
 
+systemd-tmpfiles --create zoneminder.conf && \
+
 service zoneminder stop && \
 service mysql stop && \
 service apache2 stop && \
