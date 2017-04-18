@@ -19,7 +19,7 @@ cp /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/my.cnf && \
 
 add-apt-repository -y ppa:iconnor/zoneminder && \
 apt-get update && \
-apt-get install -y zoneminder=1.30.0* php-gd && \
+apt-get install -y zoneminder=1.30.2* php-gd && \
 chmod 740 /etc/zm/zm.conf && \
 chown root:www-data /etc/zm/zm.conf && \
 adduser www-data video && \
