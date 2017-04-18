@@ -66,9 +66,9 @@ mkdir /etc/private
 touch /etc/private/tokens.txt
 chown www-data:www-data /etc/private/tokens.txt
 
+service zoneminder stop && \
 service mysql stop && \
 service apache2 stop && \
-service zoneminder stop && \
 apt-get clean && \
 
 chmod +x /etc/my_init.d/firstrun.sh && \
